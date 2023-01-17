@@ -1,5 +1,4 @@
 const google_search_config = {
-    inputQuery: ["input[name='q']"],
     sidebarContainerQuery: ['#rhs'],  // Right hand side container in Google search page (sidebar exists)
     appendContainerQuery: ['#rcnt'],  // Main container in Google search page (no sidebar)
 };
@@ -10,28 +9,26 @@ function mount () {
     container.className = "graph-container";
     // Add some text to the container
     container.innerHTML = "Hello World";
-    // Create a canvas
-    var canvas = document.createElement('canvas');
-    canvas.className = "graph-canvas";
-    canvas.width = 500;
-    canvas.height = 500;
-
-    // Give the canvas a background color
-    const ctx = canvas.getContext('2d');
-    ctx.fillStyle = "white";
-    ctx.fillRect(0, 0, canvas.width, canvas.height);
-
-    // Give the canvas a border colour
-    ctx.strokeStyle = "black";
-    ctx.strokeRect(0, 0, canvas.width, canvas.height);
-
-
-    // Append canvas to container
-    container.appendChild(canvas);
-
     // Append container to body
-    document.body.appendChild(container);
+    // document.body.appendChild(container);
+
+
+    // Check if the document contains the sidebar container
+    if (document.querySelector(google_search_config.sidebarContainerQuery)) {
+        // Append container to sidebar container
+        document.querySelector(google_search_config.sidebarContainerQuery).appendChild(container);
+    }
+    else {
+        container.classList.add('sidebar-free');
+        // Append container to append container
+        document.querySelector(google_search_config.appendContainerQuery).appendChild(container);
+    }
+
 }
+
+// Print "its working" to console
+console.log("its working");
+
 
 // Call mount function
 window.onload = mount;
