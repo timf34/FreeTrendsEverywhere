@@ -16,7 +16,7 @@ function mount () {
     // Check if the document contains the sidebar container
     if (document.querySelector(google_search_config.sidebarContainerQuery)) {
         // Append container to sidebar container
-        document.querySelector(google_search_config.sidebarContainerQuery).appendChild(container);
+        document.querySelector(google_search_config.sidebarContainerQuery).prepend(container);
     }
     else {
         container.classList.add('sidebar-free');
@@ -26,9 +26,4 @@ function mount () {
 
 }
 
-// Print "its working" to console
-console.log("its working");
-
-
-// Call mount function
 window.onload = mount;
