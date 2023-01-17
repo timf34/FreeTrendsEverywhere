@@ -1,11 +1,15 @@
+const google_search_config = {
+    inputQuery: ["input[name='q']"],
+    sidebarContainerQuery: ['#rhs'],  // Right hand side container in Google search page (sidebar exists)
+    appendContainerQuery: ['#rcnt'],  // Main container in Google search page (no sidebar)
+};
+
 function mount () {
-    // Create a container
+    // Create our container and style it.
     var container = document.createElement('div');
     container.className = "graph-container";
-
     // Add some text to the container
     container.innerHTML = "Hello World";
-
     // Create a canvas
     var canvas = document.createElement('canvas');
     canvas.className = "graph-canvas";
