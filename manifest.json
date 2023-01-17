@@ -4,8 +4,21 @@
   "description": "Free basic version of Trends Everywhere - view Google Trends alongside your Google searches.",
   "manifest_version": 3,
   "author": "Tim Farrelly",
-  "icons" : {
+  "icons": {
     "16": "images/analytics16.png",
     "48": "images/analytics48.png"
-  }
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "https://www.google.com/*"
+      ],
+      "js": [
+        "js/content.js"
+      ],
+      "css": [
+        "main.css"
+      ]
+    }
+  ]
 }
