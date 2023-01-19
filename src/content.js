@@ -25,9 +25,16 @@ function mount () {
     }
 
     // Append an image wihtin this content script
-    var img = document.createElement('img');
-    img.src = chrome.runtime.getURL('images/blockchain.png');
-    container.appendChild(img);
+    // var img = document.createElement('img');
+    // img.src = chrome.runtime.getURL('images/blockchain.png');
+    // container.appendChild(img);
+
+    console.log("Here's the fetched text");
+    fetch('http://localhost:5000/')
+        .then(response => response.json())
+        .then(data => {
+            console.log(data.message); // "Hello, World!"
+        });
 
 }
 
