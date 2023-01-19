@@ -13,3 +13,9 @@ import matplotlib.pyplot as plt
 
 plt.plot(df.index, df['Blockchain'])
 plt.show()
+
+# Save the data to a CSV file
+df.to_csv("data/blockchain.csv")
+
+# Save the image to a file
+plt.savefig("data/blockchain.png")
