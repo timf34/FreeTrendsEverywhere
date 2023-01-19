@@ -3,7 +3,7 @@ const google_search_config = {
     appendContainerQuery: ['#rcnt'],  // Main container in Google search page (no sidebar)
 };
 
-function mount () {
+function mount() {
     // Create our container and style it.
     var container = document.createElement('div');
     container.className = "graph-container";
@@ -17,8 +17,7 @@ function mount () {
     if (document.querySelector(google_search_config.sidebarContainerQuery)) {
         // Append container to sidebar container
         document.querySelector(google_search_config.sidebarContainerQuery).prepend(container);
-    }
-    else {
+    } else {
         container.classList.add('sidebar-free');
         // Append container to append container
         document.querySelector(google_search_config.appendContainerQuery).appendChild(container);
@@ -29,15 +28,23 @@ function mount () {
     // img.src = chrome.runtime.getURL('images/blockchain.png');
     // container.appendChild(img);
 
-    console.log("Here's the fetched text");
-    fetch('http://localhost:5000/')
-        .then(response => response.json())
-        .then(data => {
-            console.log(data.message); // "Hello, World!"
-        });
+    const searchQuery = "bitches";
+
+    fetch('http://localhost:5000/', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({
+            searchQuery: searchQuery
+        })
+    })
+    .then(response => response.json())
+    .then(data => {
+        console.log(data.message); // "Hello, World!"
+    });
 
 }
-
 
 
 window.onload = mount;
