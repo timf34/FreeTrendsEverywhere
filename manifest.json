@@ -8,6 +8,11 @@
     "16": "images/analytics16.png",
     "48": "images/analytics48.png"
   },
+  "permissions" : ["activeTab", "storage", "https://*/*",  "<all_urls>"],
+  "web_accessible_resources": [{
+    "resources": ["images/*"],
+    "matches": ["<all_urls>"]
+  }],
   "content_scripts": [
     {
       "matches": [

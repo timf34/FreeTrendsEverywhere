@@ -24,6 +24,13 @@ function mount () {
         document.querySelector(google_search_config.appendContainerQuery).appendChild(container);
     }
 
+    // Append an image wihtin this content script
+    var img = document.createElement('img');
+    img.src = chrome.runtime.getURL('images/blockchain.png');
+    container.appendChild(img);
+
 }
+
+
 
 window.onload = mount;
