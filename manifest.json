@@ -14,7 +14,7 @@
         "https://www.google.com/*"
       ],
       "js": [
-        "content.js"
+        "src/content.js"
       ],
       "css": [
         "main.css"
