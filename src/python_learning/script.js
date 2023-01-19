@@ -1,7 +1,16 @@
 function run () {
 
-    console.log("hello world");
-    fetch('http://localhost:5000/')
+    const searchQuery = "bitches";
+
+    fetch('http://localhost:5000/', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({
+            searchQuery: searchQuery
+        })
+    })
         .then(response => response.json())
         .then(data => {
             console.log(data.message); // "Hello, World!"
