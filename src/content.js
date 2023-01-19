@@ -1,4 +1,5 @@
 const google_search_config = {
+    inputQuery: ["input[name='q']"],
     sidebarContainerQuery: ['#rhs'],  // Right hand side container in Google search page (sidebar exists)
     appendContainerQuery: ['#rcnt'],  // Main container in Google search page (no sidebar)
 };
@@ -28,21 +29,25 @@ function mount() {
     // img.src = chrome.runtime.getURL('images/blockchain.png');
     // container.appendChild(img);
 
-    const searchQuery = "bitches";
+    const searchInput = document.querySelector(google_search_config.inputQuery);
 
-    fetch('http://localhost:5000/', {
-        method: 'POST',
-        headers: {
-            'Content-Type': 'application/json'
-        },
-        body: JSON.stringify({
-            searchQuery: searchQuery
+    if (searchInput && searchInput.value) {
+
+        fetch('http://localhost:5000/', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({
+                searchQuery: searchInput.value
+            })
         })
-    })
-    .then(response => response.json())
-    .then(data => {
-        console.log(data.message); // "Hello, World!"
-    });
+            .then(response => response.json())
+            .then(data => {
+                console.log(data.message); // "Hello, World!"
+            });
+    }
+
 
 }
 
