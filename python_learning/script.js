@@ -13,22 +13,20 @@ function run () {
     fetch('http://localhost:5000/graph.svg', {
         method: 'POST',
         headers: {
-            'Content-Type': 'application/json'
-        },
-        // Send a json {"searchQuery": "dogs"} to the Python app
-        body: JSON.stringify(data)
-    });
+            'Content-Type': 'image/svg+xml',
+        }
+    })
+    .then(response => response.text())
+    .then(data => {
+        console.log(data);
+        document.getElementById("svg_div").innerHTML = data;
+    }
+    )
+    .catch((error) => {
+        console.error('Error:', error);
+    }
+    );
 
-    // fetch('http://localhost:5000/endpoint', {
-    //   method: 'POST',
-    //   headers: {
-    //     'Content-Type': 'application/json'
-    //   },
-    //   body: JSON.stringify({
-    //     key1: 'value1',
-    //     key2: 'value2'
-    //   })
-    // });
 }
 
 window.onload = run;
