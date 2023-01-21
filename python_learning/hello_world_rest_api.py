@@ -18,22 +18,8 @@ def hello():
 
 @app.route('/graph.svg', methods=['GET', 'POST'])
 def graph():
-    print("entering graph")
-    print("here we are", request.get_data())
-    query_word = request.get_json()
-    print("query_word: ", query_word)
-    data = pt.get_data(keyword_list=[query_word])
-    data.plot_data(data, query_word, "Date", "Interest", show=False)
-    data.save_plot(data, query_word, "Date", "Interest", "graph.svg")
-
-
-
-@app.route('/endpoint', methods=['POST'])
-def endpoint():
-    data = request.get_data()
-    print(data)
-    return jsonify({"message":"Data received"})
-
+    with open('test.svg', 'rb') as f:
+        return Response(f.read(), content_type='image/svg+xml')
 
 
 if __name__ == '__main__':
