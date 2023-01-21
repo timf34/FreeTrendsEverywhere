@@ -17,9 +17,9 @@ class PyTrendsProcessing:
 
         data = self.get_data(keyword_list=keyword_list)
 
-        json_dict["data"] = data.to_json(orient="index")
+        data = data.drop(columns=['isPartial'])
 
-        # data = data.drop(labels=['isPartial'], axis='columns')
+        json_dict["data"] = data.to_json(orient="index")
 
         return json_dict
 
@@ -37,24 +37,35 @@ class PyTrendsProcessing:
         return df.to_json(orient='index')
 
     @staticmethod
-    def plot_data(df: pd.DataFrame, title: str, x_label: str, y_label: str) -> None:
+    def plot_data(df: pd.DataFrame, title: str, x_label: str, y_label: str, show: bool = False) -> None:
         plt.plot(df.index, df[title])
         plt.xlabel(x_label)
         plt.ylabel(y_label)
-        plt.show()
+        if show:
+            plt.show()
+
+    @staticmethod
+    def save_plot(df: pd.DataFrame, title: str, x_label: str, y_label: str, filename: str) -> None:
+        plt.plot(df.index, df[title])
+        plt.xlabel(x_label)
+        plt.ylabel(y_label)
+        plt.savefig(filename)
 
 
 def main():
+    keyword = "finance"
     pytrends_processing = PyTrendsProcessing()
-    df = pytrends_processing.get_data(["finance"])
-    print(df)
-    # What type is the date index?
-    print(type(df.index))
-    # pytrends_processing.plot_data(df, "Blockchain", "Date", "Interest")
 
-    # Json example
+    # Get data
+    df = pytrends_processing.get_data([keyword])
+    # Plot the data
+    pytrends_processing.plot_data(df, keyword, "Date", "Interest")
+
+    # Save the plot as a svg file
+    pytrends_processing.save_plot(df, keyword, "Date", "Interest", "test.svg")
+
+    # Convert the data to JSON
     json = pytrends_processing.data_to_json(df)
-    print(json)
 
 
 if __name__ == '__main__':
