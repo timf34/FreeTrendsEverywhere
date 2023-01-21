@@ -38,22 +38,22 @@ function mount() {
     // Query Python app with google search term.
     const searchInput = document.querySelector(google_search_config.inputQuery);
 
-    if (searchInput && searchInput.value) {
-
-        fetch('http://localhost:5000/', {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json'
-            },
-            body: JSON.stringify({
-                searchQuery: searchInput.value
-            })
-        })
-            .then(response => response.json())
-            .then(data => {
-                console.log(data.message); // "Hello, World!"
-            });
-    }
+    // if (searchInput && searchInput.value) {
+    //
+    //     fetch('http://localhost:5000/', {
+    //         method: 'POST',
+    //         headers: {
+    //             'Content-Type': 'application/json'
+    //         },
+    //         body: JSON.stringify({
+    //             searchQuery: searchInput.value
+    //         })
+    //     })
+    //         .then(response => response.json())
+    //         .then(data => {
+    //             console.log(data.message); // "Hello, World!"
+    //         });
+    // }
 
 
 }
