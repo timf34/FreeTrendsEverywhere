@@ -16,7 +16,7 @@ def hello():
     return jsonify(message=f'Hello, {data}!')
 
 
-@app.route('/graph.svg')
+@app.route('/graph.svg', methods=['GET', 'POST'])
 def graph():
     with open('test.svg', 'rb') as f:
         return Response(f.read(), content_type='image/svg+xml')
