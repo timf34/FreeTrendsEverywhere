@@ -18,7 +18,12 @@ def hello():
 
 @app.route('/graph.svg', methods=['GET', 'POST'])
 def graph():
-    with open('test.svg', 'rb') as f:
+    query_word = request.json['searchQuery']
+
+    df = pt.get_data([query_word])
+    pt.save_plot(df, query_word, "Date", "Interest", "graph.svg")
+
+    with open('graph.svg', 'rb') as f:
         return Response(f.read(), content_type='image/svg+xml')
 
 

@@ -46,6 +46,8 @@ class PyTrendsProcessing:
 
     @staticmethod
     def save_plot(df: pd.DataFrame, title: str, x_label: str, y_label: str, filename: str) -> None:
+        # Wipe the current plot
+        plt.clf()
         plt.plot(df.index, df[title])
         plt.xlabel(x_label)
         plt.ylabel(y_label)

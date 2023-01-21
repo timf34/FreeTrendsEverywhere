@@ -8,13 +8,14 @@ function run () {
 
     document.body.appendChild(div);
 
-    const data = {searchQuery: "dogs"};
+    const data = {searchQuery: "embedded finance"};
 
     fetch('http://localhost:5000/graph.svg', {
         method: 'POST',
         headers: {
-            'Content-Type': 'image/svg+xml',
-        }
+            'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(data),
     })
     .then(response => response.text())
     .then(data => {
