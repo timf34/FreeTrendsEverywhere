@@ -7,7 +7,7 @@ CORS(app)
 
 @app.route('/', methods=['POST'])
 def hello():
-    query_word = request.json['search_Query']
+    query_word = request.json['searchQuery']
     return jsonify(message=f'Hello, {query_word}!')
 
 
