@@ -2,9 +2,21 @@ import pandas as pd
 import matplotlib.pyplot as plt
 
 from pytrends.request import TrendReq
-from typing import List, Dict
+from typing import List
 
 
+# Notes: https://chat.openai.com/chat/cfff95df-7fcd-44ac-a01e-1c8602fe9651
+def singleton(cls) -> object:
+    _instances = {}
+
+    def getinstance(*args, **kwargs):
+        if cls not in _instances:
+            _instances[cls] = cls(*args, **kwargs)
+        return _instances[cls]
+    return getinstance
+
+
+@singleton
 class PyTrendsProcessing:
     # Docs here:
     def __init__(self, timeframe: str = "today 5-y"):
