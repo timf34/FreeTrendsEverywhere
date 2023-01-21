@@ -62,7 +62,7 @@ def main():
     pytrends_processing.plot_data(df, keyword, "Date", "Interest")
 
     # Save the plot as a svg file
-    pytrends_processing.save_plot(df, keyword, "Date", "Interest", "test.svg")
+    pytrends_processing.save_plot(df, keyword, "Date", "Interest", "test.png")
 
     # Convert the data to JSON
     json = pytrends_processing.data_to_json(df)
