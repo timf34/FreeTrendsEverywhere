@@ -14,8 +14,8 @@
 
     // Set the margins and dimensions of the graph
     var margin = {top: 10, right: 30, bottom: 30, left: 60},
-        width = 460 - margin.left - margin.right,
-        height = 400 - margin.top - margin.bottom;
+        width = 500 - margin.left - margin.right,
+        height = 500 - margin.top - margin.bottom;
 
     var svg = d3.select("#my_dataviz").append("svg")
         .attr("width", width + margin.left + margin.right)
@@ -25,8 +25,8 @@
 
     // Add X axis
     var x = d3.scaleLinear()
-        .domain([0, 4])
-        .range([ 0, width ]);
+        .domain([0, 3])
+        .range([ 0, width]);
     // Append the x axis to the group
     svg.append("g")
         .attr("transform", "translate(0," + height + ")")
