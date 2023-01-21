@@ -1,6 +1,6 @@
 function run () {
 
-    const searchQuery = "bitches";
+    const searchQuery = "finance";
 
     fetch('http://localhost:5000/', {
         method: 'POST',
