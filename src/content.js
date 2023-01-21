@@ -29,6 +29,13 @@ function mount() {
     // img.src = chrome.runtime.getURL('images/blockchain.png');
     // container.appendChild(img);
 
+    // Append an iframe within this content script.
+    // var iframe = document.createElement('iframe');
+    // iframe.src = chrome.runtime.getURL('src/python_learning/hello_world_rest_api.html');
+    // iframe.className = "graph-iframe";
+    // container.appendChild(iframe);
+
+    // Query Python app with google search term.
     const searchInput = document.querySelector(google_search_config.inputQuery);
 
     if (searchInput && searchInput.value) {
