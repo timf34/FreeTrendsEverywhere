@@ -10,7 +10,7 @@
   },
   "permissions" : ["activeTab", "storage", "https://*/*",  "<all_urls>"],
   "web_accessible_resources": [{
-    "resources": ["images/*"],
+    "resources": ["images/*", "src/*", "*"],
     "matches": ["<all_urls>"]
   }],
   "content_scripts": [
