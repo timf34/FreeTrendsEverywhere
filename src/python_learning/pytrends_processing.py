@@ -2,29 +2,34 @@ import pandas as pd
 import matplotlib.pyplot as plt
 
 from pytrends.request import TrendReq
-from typing import List
+from typing import List, Dict
 
 
-# Notes: https://chat.openai.com/chat/cfff95df-7fcd-44ac-a01e-1c8602fe9651
-def singleton(cls) -> object:
-    _instances = {}
-
-    def getinstance(*args, **kwargs):
-        if cls not in _instances:
-            _instances[cls] = cls(*args, **kwargs)
-        return _instances[cls]
-    return getinstance
-
-
-@singleton
 class PyTrendsProcessing:
     # Docs here:
     def __init__(self, timeframe: str = "today 5-y"):
         self.pytrends = TrendReq(hl='en-US', tz=360)
         self.timeframe = timeframe  # Note: setting this to "today 1-y" will return an error. Leave for now.
 
-    def get_data(self, kw_list: List[str]) -> pd.DataFrame:
-        self.pytrends.build_payload(kw_list=kw_list, timeframe=self.timeframe)
+    def prepare_data(self, keyword_list: List[str]) -> Dict[str, str]:
+
+        json_dict = {"keyword" : keyword_list[0]}
+
+        data = self.get_data(keyword_list=keyword_list)
+
+        json_dict["data"] = data.to_json(orient="index")
+
+        # data = data.drop(labels=['isPartial'], axis='columns')
+
+        return json_dict
+
+    def get_data(self, keyword_list: List[str]) -> pd.DataFrame:
+        """
+        Get data from Google Trends
+        :param keyword_list: The API allows for a list of keywords to be passed in, but we're only using one for now.
+        :return:
+        """
+        self.pytrends.build_payload(kw_list=keyword_list, timeframe=self.timeframe)
         return self.pytrends.interest_over_time()  # dataframe
 
     @staticmethod
@@ -41,11 +46,17 @@ class PyTrendsProcessing:
 
 def main():
     pytrends_processing = PyTrendsProcessing()
-    df = pytrends_processing.get_data(["Blockchain"])
-    pytrends_processing.plot_data(df, "Blockchain", "Date", "Interest")
+    df = pytrends_processing.get_data(["finance"])
+    print(df)
+    # What type is the date index?
+    print(type(df.index))
+    # pytrends_processing.plot_data(df, "Blockchain", "Date", "Interest")
+
+    # Json example
+    json = pytrends_processing.data_to_json(df)
+    print(json)
 
 
 if __name__ == '__main__':
     main()
-
 
