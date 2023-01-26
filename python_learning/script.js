@@ -1,4 +1,4 @@
-function run () {
+function run() {
 
     // Create a div for the svg file
     var div = document.createElement("div");
@@ -17,16 +17,16 @@ function run () {
         },
         body: JSON.stringify(data),
     })
-    .then(response => response.text())
-    .then(data => {
-        console.log(data);
-        document.getElementById("svg_div").innerHTML = data;
-    }
-    )
-    .catch((error) => {
-        console.error('Error:', error);
-    }
-    );
+        .then(response => response.text())
+        .then(data => {
+                console.log(data);
+                document.getElementById("svg_div").innerHTML = data;
+            }
+        )
+        .catch((error) => {
+                console.error('Error:', error);
+            }
+        );
 
 }
 
