@@ -1,3 +1,4 @@
+import os
 from flask import Flask, jsonify, request, Response, send_file
 from flask_cors import CORS
 
@@ -24,7 +25,9 @@ def graph():
     pt.save_plot(df, query_word, "Date", "Interest", "graph.svg")
 
     with open('graph.svg', 'rb') as f:
-        return Response(f.read(), content_type='image/svg+xml')
+        response =  Response(f.read(), content_type='image/svg+xml')
+#     os.remove('graph.svg')
+    return response
 
 
 if __name__ == '__main__':

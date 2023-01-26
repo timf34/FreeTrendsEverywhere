@@ -1,5 +1,9 @@
-import pandas as pd
+import matplotlib
+matplotlib.use('Agg')  # This is essential when using Flask.
 import matplotlib.pyplot as plt
+
+import io
+import pandas as pd
 
 from pytrends.request import TrendReq
 from typing import List, Dict
@@ -46,15 +50,24 @@ class PyTrendsProcessing:
 
     @staticmethod
     def save_plot(df: pd.DataFrame, title: str, x_label: str, y_label: str, filename: str) -> None:
-        # Wipe the current plot
-        plt.clf()
         plt.plot(df.index, df[title])
         plt.xlabel(x_label)
         plt.ylabel(y_label)
         plt.savefig(filename)
+        plt.clf()
+
+    @staticmethod
+    def save_plot_to_io(df: pd.DataFrame, title: str, x_label: str, y_label: str) -> io.BytesIO:
+        buf = io.BytesIO()
+        plt.plot(df.index, df[title])
+        plt.xlabel(x_label)
+        plt.ylabel(y_label)
+        plt.savefig(buf, format='svg')
+        buf.seek(0)
+        return buf
 
 
-def main():
+def old_main():
     keyword = "finance"
     pytrends_processing = PyTrendsProcessing()
 
@@ -69,6 +82,20 @@ def main():
     # Convert the data to JSON
     json = pytrends_processing.data_to_json(df)
 
+
+def main():
+    keyword = "finance"
+    pt = PyTrendsProcessing()
+
+    df = pt.get_data([keyword])
+
+    # # Save plot via io
+    # buf = pt.save_plot_to_io(df, keyword, "Date", "Interest")
+    #
+    # # Show buf as svg
+    # with open('graph.svg', 'wb') as f:
+    #     f.write(buf.getvalue())
+    #
 
 if __name__ == '__main__':
     main()
