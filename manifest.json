@@ -5,12 +5,12 @@
   "manifest_version": 3,
   "author": "Tim Farrelly",
   "icons": {
-    "16": "images/analytics16.png",
-    "48": "images/analytics48.png"
+    "16": "src/images/analytics16.png",
+    "48": "src/images/analytics48.png"
   },
   "permissions" : ["activeTab", "storage"],
   "web_accessible_resources": [{
-    "resources": ["images/*", "src/*", "*"],
+    "resources": ["src/*", "*"],
     "matches": ["<all_urls>"]
   }],
   "content_scripts": [
