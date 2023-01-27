@@ -2,7 +2,9 @@ const google_search_config = {
     inputQuery: ["input[name='q']"],
     sidebarContainerQuery: ['#rhs'],  // Right hand side container in Google search page (sidebar exists)
     appendContainerQuery: ['#rcnt'],  // Main container in Google search page (no sidebar)
-};
+}
+
+const development = true; // For development on .html page
 
 function mount() {
     // Create our container and style it.
@@ -19,15 +21,28 @@ function mount() {
     if (document.querySelector(google_search_config.sidebarContainerQuery)) {
         // Append container to sidebar container
         document.querySelector(google_search_config.sidebarContainerQuery).prepend(container);
-    } else{
+    } else if (document.querySelector(google_search_config.appendContainerQuery)) {
         container.classList.add('sidebar-free');
         // Append container to append container
         document.querySelector(google_search_config.appendContainerQuery).appendChild(container);
     }
+    else {
+        // For using the .html page for development
+        document.body.appendChild(container);
+    }
+
+    let searchInput = {};  // Need to be defined outside the if statement; scope is limited to block its defined in
+
+    // If Google search is available, set that as the search input
+    if (document.querySelector(google_search_config.inputQuery)) {
+        searchInput.value = document.querySelector(google_search_config.inputQuery).value;
+    }
+    else {
+        // Define searchInput as "finance" so that searchInput.value = "finance" when we call it later
+        searchInput.value = "finance";
+    }
 
 
-    // Query Python app with google search term.
-    const searchInput = document.querySelector(google_search_config.inputQuery);
 
     if (searchInput && searchInput.value) {
 
