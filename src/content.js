@@ -42,6 +42,12 @@ function mount() {
         searchInput.value = "finance";
     }
 
+    // Get URL to images/nude-image.jpg
+    var img = chrome.runtime.getURL("src/images/nude-image.jpg");
+    console.log(img);
+    // Set the background image of the container to the image
+    container.style.backgroundImage = "url(" + img + ")";
+
 
 
     if (searchInput && searchInput.value) {
