@@ -2,7 +2,7 @@ import os
 from flask import Flask, jsonify, request, Response, send_file
 from flask_cors import CORS
 
-from misc.pytrends_processing import PyTrendsProcessing
+from pytrends_processing import PyTrendsProcessing
 
 app = Flask(__name__)
 CORS(app)
@@ -26,7 +26,6 @@ def graph():
 
     with open('graph.svg', 'rb') as f:
         response =  Response(f.read(), content_type='image/svg+xml')
-#     os.remove('graph.svg')
     return response
 
 
